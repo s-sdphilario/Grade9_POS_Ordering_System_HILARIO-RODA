@@ -1,0 +1,106 @@
+class Product:
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+    def display_product(self):
+        print(self.name, "- P", format(self.price, ".2f"))
+
+
+class Burger(Product):
+    def __init__(self):
+        super().__init__("Burger", 50.00)
+
+
+class Fries(Product):
+    def __init__(self):
+        super().__init__("Fries", 35.00)
+
+
+class SoftDrink(Product):
+    def __init__(self):
+        super().__init__("Soft Drink", 25.00)
+
+
+class Order:
+    def __init__(self, product, quantity):
+        self.product = product
+        self.quantity = quantity
+        self.subtotal = product.price * quantity
+
+    def display_order(self):
+        print("\nProduct:", self.product.name)
+        print("Quantity:", self.quantity)
+        print("Price: P", format(self.product.price, ".2f"))
+        print("Subtotal: P", format(self.subtotal, ".2f"))
+
+
+class FoodOrderingSystem:
+
+    def __init__(self):
+        self.orders = []
+
+        self.menu = {1: Burger(), 2: Fries(), 3: SoftDrink()}
+
+    def display_menu(self):
+        print(" \n================================ ")
+        print(" Pisay food corner ")
+        print(" ================================ ")
+        print(" MENU ")
+
+        for number, product in self.menu.items():
+            print(number, end=". ")
+            product.display_product()
+
+    def place_order(self):
+
+        # Allow two orders
+        for i in range(2):
+
+            self.display_menu()
+
+            print(" \nORDER ", i + 1)
+
+            choice = int(input(" Select a product (1-3): "))
+
+            if choice in self.menu:
+
+                product = self.menu[choice]
+
+                quantity = int(input(" Enter quantity: "))
+
+                if quantity > 0:
+                    order = Order(product, quantity)
+                    self.orders.append(order)
+
+                    print(" Subtotal: P ", format(order.subtotal, " .2f "))
+
+                else:
+                    print("Invalid quantity.")
+
+            else:
+                print("Invalid product selection.")
+
+    def display_receipt(self):
+
+        print(" \n================================ ")
+        print(" Pisay food corner")
+        print(" Receipt ")
+        print(" ================================ ")
+
+        total = 0
+
+        for order in self.orders:
+            order.display_order()
+            total += order.subtotal
+
+        print("\n================================ ")
+        print(" TOTAL AMOUNT: P ", format(total, " .2f "))
+        print(" ================================ ")
+        print(" Thank you for ordering !")
+
+
+system = FoodOrderingSystem()
+
+system.place_order()
+system.display_receipt()
