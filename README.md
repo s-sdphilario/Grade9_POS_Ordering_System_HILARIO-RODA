@@ -1,2 +1,3 @@
-# sy26-27_pshsmrc
-school year 2026-2027
+# Grade9_POS_Ordering_System
+# This repository serves as the collaboration practical exam for Sofia Hilario and Penelope Roda for the activity.
+
